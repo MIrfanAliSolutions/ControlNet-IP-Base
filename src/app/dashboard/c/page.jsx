@@ -88,7 +88,7 @@ export default function ChatRoomDetail() {
       task: 'image',
       step: 'image',
     }));
-    let isBuzzLight = prompt.includes('buzz');
+    let isBuzzLight = prompt.toLowerCase().includes('buzz');
     isBuzzLight ? (dispatch(setBuzzToTrue())) : (dispatch(setBuzzToFalse()))
     setHistory((prevState) =>
       prevState.map((item) =>
