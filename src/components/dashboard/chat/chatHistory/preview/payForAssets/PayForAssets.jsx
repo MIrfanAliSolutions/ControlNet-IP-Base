@@ -50,7 +50,7 @@ const PayForAssets = ({
         </div>
         <div className='w-full py-4 text-center'>
         <p className='text-xs text-white/60 font-light px-4 leading-6  '>
-        {auth?.isBuzz ? 'Pixar' : 'Nintendo'} has been detected as an intellectual property owner.
+        droppLink has detected that your generated content contains intellectual property belonging to {auth?.isBuzz ? 'Pixar' : 'Nintendo'}.
           </p>
           <p className='text-3xl font-semibold leading-10 py-2 capitalize'>
           Intellectual Property Detected
@@ -58,6 +58,7 @@ const PayForAssets = ({
           <p className='text-xs text-white/60 font-light px-4 leading-6'>
           This AI-generated artwork includes third-party intellectual property, such as logos or copyrighted characters or images.
           </p>
+          <a href="javascript:void(0)" className='text-xs text-white font-bold px-4 leading-6'>Click here to learn more…</a>
         </div>
 
         <div className='w-full block'>
