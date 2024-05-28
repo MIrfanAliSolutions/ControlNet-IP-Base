@@ -10,6 +10,8 @@ import {
   useSelector,
   selectAuth,
   resetWaterMarked,
+  setBuzzToTrue,
+  setBuzzToFalse,
 } from '@/lib';
 import ImagesPreview from '@/components/dashboard/chat/chatHistory/preview/ImagesPreview';
 import ImagesPreviewFinal from '@/components/dashboard/chat/chatHistory/preview/ImagesPreviewFinal';
@@ -80,13 +82,14 @@ export default function ChatRoomDetail() {
     resetPrompt();
   };
 
-  const runInitialPromptApi = async () => {
+  const runInitialPromptApi = async (prompt) => {
     setChatQuery((prevState) => ({
       ...prevState,
       task: 'image',
       step: 'image',
     }));
-
+    let isBuzzLight = prompt.includes('buzz');
+    isBuzzLight ? (dispatch(setBuzzToTrue())) : (dispatch(setBuzzToFalse()))
     setHistory((prevState) =>
       prevState.map((item) =>
         item.id === localStorage.getItem('chatId')
@@ -116,20 +119,14 @@ export default function ChatRoomDetail() {
       );
       setUserPromptPlaceholder('Would you like to remove the watermark?');
       setDisabled(false);
-    }, 12000);
+      scrollToBottom()
+    }, 10000);
   };
 
   const sendUserPrompt = async () => {
     const userPromptValue = userPrompt.trim();
-    if (!userPromptValue) return;
-
-    if (chatQuery.task === 'digital') {
-      // Add digital task handling logic here
-    } else if (chatQuery.task === 'product') {
-      // Add product task handling logic here
-    } else {
-      runInitialPromptApi(userPromptValue, auth.userInfo?.accessToken);
-    }
+      runInitialPromptApi(userPromptValue);
+    
   };
 
   const scrollToBottom = () => {
@@ -146,7 +143,6 @@ export default function ChatRoomDetail() {
 
   useEffect(() => {
     if (isWaterMarked) {
-      console.log('It is watermarked true');
     } else {
       const chatId = localStorage.getItem('chatId');
       setHistory((prevState) =>
@@ -163,6 +159,7 @@ export default function ChatRoomDetail() {
       setDisabled(false);
       dispatch(resetWaterMarked());
       setUserPromptPlaceholder('What would you like to do today, AMiGO?');
+      scrollToBottom()
     }
   }, [isWaterMarked]);
 

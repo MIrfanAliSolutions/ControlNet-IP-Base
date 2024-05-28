@@ -1,12 +1,25 @@
 import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
+import {
+  useSelector,
+  selectAuth,
+} from '@/lib';
 import ImagesSlider from "@/modals/chatHistory/ImagesSlider";
-export default function ImagesPreviewFinal({ chatData, type, generationImage }) {
+export default function ImagesPreviewFinal({ generationImage }) {
   const [showLargeView, setShowLargeView] = useState(false);
   const [largeImageSrc, setLargeImageSrc] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
+  const auth = useSelector(selectAuth);
+  let url = '';
+  if(auth.isBuzz)
+    {
+      url = '/assets/images/chat/pixarFinal.jpeg';
+    }
+    else
+    {
+      url = '/assets/images/chat/final.jpeg';
+    }
   const handleClick = (imageSrc) => {
     setShowLargeView(true);
     setLargeImageSrc(imageSrc);
@@ -21,7 +34,7 @@ export default function ImagesPreviewFinal({ chatData, type, generationImage }) 
   };
 
   const handleDownload = () => {
-    const imageUrl = '/assets/images/chat/final.jpeg';
+    const imageUrl = url;
     const customFilename = 'image.jpeg';
     downloadImage(imageUrl, customFilename);
   };
@@ -44,9 +57,9 @@ export default function ImagesPreviewFinal({ chatData, type, generationImage }) 
                   className={`grid gap-4 p-4 py-4 justify-center allImages grid-cols-1`}
                 >
                   <img
-                    src='/assets/images/chat/final.jpeg'
+                    src={url}
                     className="w-full h-auto rounded-sm"
-                    onClick={() => handleClick('/assets/images/chat/final.jpeg')}
+                    onClick={() => handleClick(url)}
                   />
                 </div>
               </div>
@@ -121,7 +134,7 @@ export default function ImagesPreviewFinal({ chatData, type, generationImage }) 
 
                 <div className="bg-gray-100 absolute right-0 top-1 rounded-xl px-2 py-1">
                   <a
-                    href='https://explorer.solana.com/address/BWcB68VttkmfsMugjwBPoSoCwm6RbApdNH1tXFS7GeFv?cluster=devnet'
+                    href={`${auth?.isBuzz ? "https://explorer.solana.com/address/ECgcYCAQQaGZsbFWKviEUgYPesfXzmSu83NdivkdwkKK?cluster=devnet": "https://explorer.solana.com/address/BWcB68VttkmfsMugjwBPoSoCwm6RbApdNH1tXFS7GeFv?cluster=devnet"}  `}
                     className=" text-gray-600 text-xs flexCenter cursor-pointer"
                     target="_blank"
                     rel="noopener noreferrer"

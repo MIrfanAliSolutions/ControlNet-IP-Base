@@ -4,6 +4,7 @@ const initialState = {
   isLogin: false,
   balance: 1950,
   isWatermarked: true,
+  isBuzz:false
 };
 
 const authSlice = createSlice({
@@ -23,11 +24,17 @@ const authSlice = createSlice({
     resetWaterMarked: (state, { payload }) => {
       state.isWatermarked = true;
     },
+    setBuzzToTrue: (state, { payload }) => {
+      state.isBuzz = true;
+    },
+    setBuzzToFalse: (state, { payload }) => {
+      state.isBuzz = false;
+    }
   },
 });
 
 export const {
-  toggleLogin, updateBalance, updateWaterMarked, resetWaterMarked
+  toggleLogin, updateBalance, updateWaterMarked, resetWaterMarked, setBuzzToTrue, setBuzzToFalse
 } = authSlice.actions;
 
 export default authSlice.reducer;
