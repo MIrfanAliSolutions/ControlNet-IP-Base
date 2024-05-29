@@ -10,7 +10,7 @@ const Footer = () => {
     <div className='relative text-[10px] md:text-base flex flex-wrap w-full justify-center pb-10'>
       <Link
         className='text-white font-semibold hover:text-blue-700'
-        href={auth?.isLogin ? '/dashboard' : '/'}
+        href={auth?.isLogin ? '/dashboard/c' : '/'}
       >
         Home
       </Link>

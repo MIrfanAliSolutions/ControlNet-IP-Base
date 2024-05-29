@@ -7,7 +7,15 @@ export default function Layout({ children }) {
   const auth = useSelector(selectAuth);
   const router = useRouter();
   useEffect(() => {
-    if (!auth?.isLogin) router.push('/sign-in');
+    if (auth?.isLogin)
+      {
+        router.push('/dashboard/c');
+      } 
+      else
+      {
+        router.push('/sign-in');
+      }
+    
   }, []);
 
   return auth?.isLogin ? children : null;
