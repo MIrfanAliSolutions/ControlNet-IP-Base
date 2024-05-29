@@ -58,7 +58,7 @@ const PayForAssets = ({
           <p className='text-xs text-white/60 font-light px-4 leading-6'>
           This AI-generated artwork includes third-party intellectual property, such as logos or copyrighted characters or images.
           </p>
-          <a href="javascript:void(0)" className='text-xs text-white font-bold px-4 leading-6'>Click here to learn more…</a>
+          <a href="javascript:void(0)" className='text-xs text-blue-400 font-extrabold px-4 leading-6'>Click here to learn more…</a>
         </div>
 
         <div className='w-full block'>
